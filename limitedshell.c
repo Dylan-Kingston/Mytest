@@ -188,7 +188,7 @@ void lsh_loop(void)
 
 int main(int argc, char **argv)
 {
-  printf("Welcome To The Networkig Shell wank wank wank.\n");
+  printf("Welcome To The Network Test Enviroment.\n");
   lsh_loop();
   return EXIT_SUCCESS;
 }
