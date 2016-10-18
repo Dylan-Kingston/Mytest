@@ -4,33 +4,18 @@
 #include <stdio.h>
 #include <string.h>
 
-int lsh_cd(char **args);
 int lsh_exit(char **args);
 
 char *builtin_str[] = {
-  "cd",
   "exit"
 };
 
 int (*builtin_func[]) (char **) = {
-  &lsh_cd,
   &lsh_exit
 };
 
 int lsh_num_builtins() {
   return sizeof(builtin_str) / sizeof(char *);
-}
-
-int lsh_cd(char **args)
-{
-  if (args[1] == NULL) {
-    fprintf(stderr, "lsh: expected argument to \"cd\"\n");
-  } else {
-    if (chdir(args[1]) != 0) {
-      perror("lsh");
-    }
-  }
-  return 1;
 }
 
 int lsh_exit(char **args)
@@ -63,11 +48,6 @@ int lsh_launch(char **args)
   return 1;
 }
 
-/**
-   @brief Execute shell built-in or launch program.
-   @param args Null terminated list of arguments.
-   @return 1 if the shell should continue running, 0 if it should terminate
- */
 int lsh_execute(char **args)
 {
   int i;
@@ -87,10 +67,7 @@ int lsh_execute(char **args)
 }
 
 #define LSH_RL_BUFSIZE 1024
-/**
-   @brief Read a line of input from stdin.
-   @return The line from stdin.
- */
+
 char *lsh_read_line(void)
 {
   int bufsize = LSH_RL_BUFSIZE;
