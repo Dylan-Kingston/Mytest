@@ -2,19 +2,20 @@
 
 import sys
 import subprocess
+import os
 
 ans=True
 
 def help_menu():
 
-    print("\nWelcome To The Basic Networking Shell.")
+    print("\n\nWelcome To The Basic Networking Shell.")
     print("Select an option from the list below.\n")
 
-    print("1. Display The Current User Of The Shell.")
-    print("2. Display The Current Working Directory.")
-    print("3. Display Settings For Interface eth0.")
-    print("4. ")
-    print("exit. Exit The Networking Shell.")
+    print("whoami |  Display The Current User Of The Shell.")
+    print("who    |  List All Logged In Users.")
+    print("pw     |  Display The Current Working Directory.")
+    print("ifc    |  Display Settings For Interface eth0.")
+    print("exit   |  Exit The Networking Shell.\n\n")
 
 while ans:
 
@@ -29,13 +30,7 @@ while ans:
     elif ans=="pw":
       subprocess.call("pwd",shell=True)
 
-    elif ans=="pwd":
-      subprocess.call("pwd",shell=True)
-
     elif ans=="ifc":
-      subprocess.call("ifconfig",shell=True)
-
-    elif ans=="ifconfig":
       subprocess.call("ifconfig",shell=True)
 
     elif ans=="help":
@@ -43,11 +38,11 @@ while ans:
 
     elif ans=="exit":
       print("Exiting The Shell.\n") 
-      ans = None
+      sys.exit()
 
     elif ans=="":
       ans = True
 
     else:
-      print("Incorrect choice. Try again\n")
+      print("Unknown Command.")
       ans = True
