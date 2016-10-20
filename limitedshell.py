@@ -5,7 +5,8 @@ import subprocess
 
 ans=True
 
-while ans:
+def help_menu():
+
     print("\nWelcome To The Basic Networking Shell.")
     print("Select an option from the list below.\n")
 
@@ -15,7 +16,9 @@ while ans:
     print("4. ")
     print("exit. Exit The Networking Shell.")
 
-    ans = raw_input("\n>:" )
+while ans:
+
+    ans = raw_input(">:" )
 
     if ans=="whoami":
       subprocess.call("whoami",shell=True)
@@ -35,9 +38,15 @@ while ans:
     elif ans=="ifconfig":
       subprocess.call("ifconfig",shell=True)
 
+    elif ans=="help":
+      help_menu()      
+
     elif ans=="exit":
       print("Exiting The Shell.\n") 
       ans = None
+
+    elif ans=="":
+      ans = True
 
     else:
       print("Incorrect choice. Try again\n")
