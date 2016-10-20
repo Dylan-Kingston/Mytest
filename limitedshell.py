@@ -4,6 +4,9 @@ import sys
 import subprocess
 import os
 import time
+import getpass
+import pwd
+import grp
 
 ans=True
 
@@ -19,6 +22,7 @@ def help_menu():
     print("cal    |  Display The Calendar.")
     print("ls -al |  View The Contents Of The Current Directory.")
     print("dt     |  Display The Date And Time On The System.")
+    print("ud     |  Display Standard Details For The Currently Logged-In User.")
     print("exit   |  Exit The Networking Shell.\n\n")
 
 while ans:
@@ -47,6 +51,18 @@ while ans:
 
     elif ans=="dt":
       print(time.strftime("%Y%m%d%H%M%S"))
+
+    elif ans=="ud":
+      username=getpass.getuser()
+      userId=pwd.getpwnam(username).pw_uid
+      groupId = pwd.getpwnam(username).pw_gid
+      groupName = grp.getgrgid(groupId).gr_name
+
+      homeDirectory=os.getenv("HOME")
+      info=os.stat(homeDirectory)
+      iNode=info.st_ino
+
+      print(str(userId)+","+str(groupId)+","+username+","+groupName+","+str(iNode))
 
     elif ans=="help":
       help_menu()      
