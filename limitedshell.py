@@ -15,7 +15,11 @@ def help_menu():
     print("who    |  List All Logged In Users.")
     print("pw     |  Display The Current Working Directory.")
     print("ifc    |  Display Settings For Interface eth0.")
+    print("cal    |  Display The Calendar.")
     print("exit   |  Exit The Networking Shell.\n\n")
+
+def ifc(self, args):
+    ifc.ifc(args)
 
 while ans:
 
@@ -32,6 +36,9 @@ while ans:
 
     elif ans=="ifc":
       subprocess.call("ifconfig",shell=True)
+
+    elif ans=="cal":
+      subprocess.call("cal",shell=True)
 
     elif ans=="help":
       help_menu()      
