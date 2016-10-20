@@ -1,7 +1,10 @@
 #!/usr/bin/python
+
 import sys
 import subprocess
+
 ans=True
+
 while ans:
     print("\nWelcome To The Basic Networking Shell.")
     print("Select an option from the list below.\n")
@@ -14,21 +17,28 @@ while ans:
 
     ans = raw_input("\n>:" )
 
-    if ans=="1":
-      print("1. whoami / who\n")
+    if ans=="whoami":
       subprocess.call("whoami",shell=True)
+ 
+    elif ans=="who":
       subprocess.call("who",shell=True)
-    elif ans=="2":
-      print("2. pwd\n")
+
+    elif ans=="pw":
       subprocess.call("pwd",shell=True)
-    elif ans=="3":
-      print("3.\n")
+
+    elif ans=="pwd":
+      subprocess.call("pwd",shell=True)
+
+    elif ans=="ifc":
       subprocess.call("ifconfig",shell=True)
-    elif ans=="4":
-      print("\n")
+
+    elif ans=="ifconfig":
+      subprocess.call("ifconfig",shell=True)
+
     elif ans=="exit":
       print("Exiting The Shell.\n") 
       ans = None
+
     else:
       print("Incorrect choice. Try again\n")
-      ans = True 
+      ans = True
