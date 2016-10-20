@@ -3,6 +3,7 @@
 import sys
 import subprocess
 import os
+import time
 
 ans=True
 
@@ -16,6 +17,8 @@ def help_menu():
     print("pw     |  Display The Current Working Directory.")
     print("ifc    |  Display Settings For Interface eth0.")
     print("cal    |  Display The Calendar.")
+    print("ls -al |  View The Contents Of The Current Directory.")
+    print("dt     |  Display The Date And Time On The System.")
     print("exit   |  Exit The Networking Shell.\n\n")
 
 while ans:
@@ -38,6 +41,12 @@ while ans:
 
     elif ans=="cal":
       subprocess.call("cal",shell=True)
+
+    elif ans=="ls -al":
+      subprocess.call("ls -al",shell=True)
+
+    elif ans=="dt":
+      print(time.strftime("%Y%m%d%H%M%S"))
 
     elif ans=="help":
       help_menu()      
