@@ -18,9 +18,6 @@ def help_menu():
     print("cal    |  Display The Calendar.")
     print("exit   |  Exit The Networking Shell.\n\n")
 
-def ifc(self, args):
-    ifc.ifc(args)
-
 while ans:
 
     ans = raw_input(">:" )
@@ -35,7 +32,9 @@ while ans:
       subprocess.call("pwd",shell=True)
 
     elif ans=="ifc":
-      subprocess.call("ifconfig",shell=True)
+      f = os.popen('/sbin/ifconfig eth0')
+      result = f.read()
+      print(result)
 
     elif ans=="cal":
       subprocess.call("cal",shell=True)
