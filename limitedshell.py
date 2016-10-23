@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-from Tkinter import *
 import sys
 import subprocess
 import os
@@ -8,6 +7,20 @@ import time
 import getpass
 import pwd
 import grp
+
+username = getpass.getuser()
+userId = pwd.getpwnam(username).pw_uid
+groupId = pwd.getpwnam(username).pw_gid
+groupName = grp.getgrgid(groupId).gr_name
+
+homeDirectory = os.getenv('HOME')
+info = os.stat(homeDirectory)
+iNode = info.st_ino
+
+date_time = time.strftime('%Y%m%d%H%M%S')
+
+file = open('log.log', 'a+')
+file_read = open('log.log', 'r')
 
 ans=True
 
@@ -24,11 +37,13 @@ def help_menu():
     print("ls -al |  View The Contents Of The Current Directory.")
     print("dt     |  Display The Date And Time On The System.")
     print("ud     |  Display Standard Details For The Currently Logged-In User.")
+    print("log    |  Display A List Of Recently Used Commands.")
     print("exit   |  Exit The Networking Shell.\n\n")
 
 while ans:
 
     ans = raw_input(">:" )
+    file.write(str(username) + ' -- COMMAND USED: ' + str(ans) + ' -- TIMESTAMP: ' + date_time + '\n')
 
     if ans=="whoami":
       subprocess.call("whoami",shell=True)
@@ -51,25 +66,22 @@ while ans:
       subprocess.call("ls -al",shell=True)
 
     elif ans=="dt":
-      print(time.strftime("%Y%m%d%H%M%S"))
+      print date_time
 
     elif ans=="ud":
-      username=getpass.getuser()
-      userId=pwd.getpwnam(username).pw_uid
-      groupId = pwd.getpwnam(username).pw_gid
-      groupName = grp.getgrgid(groupId).gr_name
-
-      homeDirectory=os.getenv("HOME")
-      info=os.stat(homeDirectory)
-      iNode=info.st_ino
-
       print(str(userId)+","+str(groupId)+","+username+","+groupName+","+str(iNode))
 
     elif ans=="help":
       help_menu()      
 
+    elif ans=="log":
+      for line in file_read:
+        print str(line)
+
     elif ans=="exit":
-      print("Exiting The Shell.\n") 
+      print("Exiting The Shell.\n")
+      file.close()
+      file_read.close() 
       sys.exit()
 
     elif ans=="":
