@@ -12,15 +12,14 @@ username = getpass.getuser()
 userId = pwd.getpwnam(username).pw_uid
 groupId = pwd.getpwnam(username).pw_gid
 groupName = grp.getgrgid(groupId).gr_name
-
 homeDirectory = os.getenv('HOME')
 info = os.stat(homeDirectory)
 iNode = info.st_ino
 
 date_time = time.strftime('%Y%m%d%H%M%S')
 
-file = open('log.log', 'a+')
-file_read = open('log.log', 'r')
+files = open('logs.log', 'a+')
+files_read = open('logs.log', 'r')
 
 ans=True
 
@@ -43,7 +42,7 @@ def help_menu():
 while ans:
 
     ans = raw_input(">:" )
-    file.write(str(username) + ' -- COMMAND USED: ' + str(ans) + ' -- TIMESTAMP: ' + date_time + '\n')
+    files.write(str(username) + '    ' + str(ans) + '    ' + date_time + '\n')
 
     if ans=="whoami":
       subprocess.call("whoami",shell=True)
@@ -75,13 +74,14 @@ while ans:
       help_menu()      
 
     elif ans=="log":
-      for line in file_read:
+      for line in files_read:
         print str(line)
+      files_read.seek(0,0)
 
     elif ans=="exit":
       print("Exiting The Shell.\n")
-      file.close()
-      file_read.close() 
+      files.close()
+      files_read.close() 
       sys.exit()
 
     elif ans=="":
