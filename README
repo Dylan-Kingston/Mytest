@@ -1,1 +1,32 @@
-**INSTRUCTIONS FOR THE LIMITED SHELL**
+**INSTRUCTIONS FOR ACCESSING THE SHELL**
+
+This shell is based off of a Python script, with Linux functionality built into it via a number of internal and external commands.
+This Python script works as the default shell of a user that logs into the virtual machine. The user in question does not have access
+to the stndard bash shell once the script has been set as their shell.
+
+Firstly, while logged in as a user with root privelages, create a second user:
+sudo useradd user2
+
+Various other commands can be run at this time, including setting the new users group, giving it root privelages etc.
+
+Secondly, locate the directory that the Python script is stored in. In my vm, the location is /usr/bin/gitrepo/Mytest.
+It is called limitedshell.py.
+Run the command to give all users the correct privelages on the script:
+sudo chmod a+x limitedshell.py
+
+Thirdly, the script must be set as the shell for the new user you have created:
+sudo chsh -s /usr/bin/gitrepo/Mytest/limitedshell.py user2
+Notice how the command includes the location of the script, the name of the script, and finally the user that the 
+script is being set as the shell of.
+
+To check that the shell has been set correctly, su into the second user.
+sudo su - user2
+
+The script should launch automatically. Upon exiting the script when you su into it from root, it should return to root.
+If you launched the script by directly logging in to user2, the whole command window will close upon exiting the script.
+
+
+**INSTRUCTIONS FOR USING THE SHELL**
+
+The shell/Python script contains a very basic set of available commands. To bring up the list of commands, type 'help' at
+the command prompt. This prints the menu of ten or so commands that have been programmed into the script.
